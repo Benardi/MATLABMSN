@@ -20,15 +20,42 @@ classdef NumericalEquationSolver
         end
         
         function self = setInterval(self, a, b)
-            if self.testInterval(a,b) == 1
+            if self.testIntervalContinuity(a,b) == 0      
+                error('Interval contains descontinuity')
+                
+            elseif self.testTheorem1(a,b) == 0
+                error('Interval violates Theorem1')
+
+            elseif self.testHypothesis(a,b) == 0
+                error('Interval violates Hypothesis')
+            else
                 self.LeftEndPoint = a;
                 self.RightEndPoint = b;
-            else
-                error('Interval contains descontinuity')
             end
         end
         
-        function r = testInterval(obj, a , b)
+        function r = testTheorem1(obj, a, b)
+            r = 1;
+            equ = obj.Equation;
+            
+            if vpa(subs(equ,symvar(equ,1),a)) * vpa(subs(equ,symvar(equ,1),b)) > 0
+                r = 0;
+            end
+        
+        
+        end
+        
+        function r = testHypothesis(obj, a, b)
+            r = 1;
+            f = diff(obj.Equation);
+            
+            if vpa(subs(f,symvar(f,1),a)) * vpa(subs(f,symvar(f,1),b)) < 0
+                r = 0;
+            end
+        end
+                 
+        
+        function r = testIntervalContinuity(obj, a , b)
             r = 1;
             disc = feval(symengine, 'discont', obj.Equation, symvar(obj.Equation, 1));
             for val = disc
@@ -36,22 +63,9 @@ classdef NumericalEquationSolver
                     r = 0;
                     
                 end
-            end
-            
-            equ = obj.Equation;
-            f = diff(equ);
-            
-            if vpa(subs(equ,symvar(equ,1),a)) * vpa(subs(equ,symvar(equ,1),b)) > 0
-                r = 0;
-            end
-            
-            if vpa(subs(f,symvar(f,1),a)) * vpa(subs(f,symvar(f,1),a)) < 0
-                r = 0;
-            end
-                    
-                    
+            end 
         end
-            
+           
     end
     
 end
