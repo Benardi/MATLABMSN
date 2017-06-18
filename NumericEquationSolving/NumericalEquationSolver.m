@@ -37,6 +37,17 @@ classdef NumericalEquationSolver
                     
                 end
             end
+            
+            equ = obj.Equation;
+            f = diff(equ);
+            
+            if vpa(subs(equ,symvar(equ,1),a)) * vpa(subs(equ,symvar(equ,1),b)) > 0
+                r = 0;
+            end
+            
+            if vpa(subs(f,symvar(f,1),a)) * vpa(subs(f,symvar(f,1),a)) < 0
+                r = 0;
+            end
                     
                     
         end
