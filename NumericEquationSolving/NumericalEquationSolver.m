@@ -19,7 +19,16 @@ classdef NumericalEquationSolver
             end
         end
         
-        function r = testInterval(obj,a , b)
+        function self = setInterval(self, a, b)
+            if self.testInterval(a,b) == 1
+                self.LeftEndPoint = a;
+                self.RightEndPoint = b;
+            else
+                error('Interval contains descontinuity')
+            end
+        end
+        
+        function r = testInterval(obj, a , b)
             r = 1;
             disc = feval(symengine, 'discont', obj.Equation, symvar(obj.Equation, 1));
             for val = disc
