@@ -19,8 +19,17 @@ classdef NumericalEquationSolver
             end
         end
         
-        function r = testInterval(obj)
-            r = feval(symengine, 'discont', obj.Equation, symvar(obj.Equation, 1));
+        function r = testInterval(obj,a , b)
+            r = 1;
+            disc = feval(symengine, 'discont', obj.Equation, symvar(obj.Equation, 1));
+            for val = disc
+                if (val == a || val ==b || (val > a && val < b))
+                    r = 0;
+                    
+                end
+            end
+                    
+                    
         end
             
     end
