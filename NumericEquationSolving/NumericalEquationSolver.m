@@ -33,7 +33,8 @@ classdef NumericalEquationSolver
                 self.RightEndPoint = b;
             end
         end
-        
+    end
+    methods(Access = private)
         function r = testTheorem1(obj, a, b)
             r = 1;
             equ = obj.Equation;
@@ -65,8 +66,11 @@ classdef NumericalEquationSolver
                 end
             end 
         end
-           
     end
-    
+        
+        
+           
 end
+    
+
 
