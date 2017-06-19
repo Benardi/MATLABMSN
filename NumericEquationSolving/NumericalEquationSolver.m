@@ -33,18 +33,35 @@ classdef NumericalEquationSolver
                 self.RightEndPoint = b;
             end
         end
-    end
-    methods(Access = private)
+           
+        function r = defineNewInterval(obj, xk)
+             if obj.testTheorem1(obj.LeftEndPoint, xk) == 1
+                 obj.RightEndPoint = xk;
+                 
+             else
+                 obj.LeftEndPoint = xk;
+             end
+               r = obj;  
+        end  
+        
+        function r = testCandidate(obj, entry)
+            r = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
+        end
+        
         function r = testTheorem1(obj, a, b)
             r = 1;
             equ = obj.Equation;
             
             if vpa(subs(equ,symvar(equ,1),a)) * vpa(subs(equ,symvar(equ,1),b)) > 0
                 r = 0;
+                
             end
         
         
         end
+
+        
+
         
         function r = testHypothesis(obj, a, b)
             r = 1;
@@ -67,8 +84,6 @@ classdef NumericalEquationSolver
             end 
         end
     end
-        
-        
            
 end
     
