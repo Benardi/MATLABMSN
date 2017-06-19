@@ -1,11 +1,12 @@
 syms x a b
-equ(x) = x^2 - 4;
-n = NumericalEquationSolver(x^2 - 4);
-n.setInterval(0,10);
-tries = 100; 
-precision= 0.0001;
+format long
+equ(x) = x^3 -x - 1;
+n = NumericalEquationSolver(equ(x), 0.0000000000001);
+n.setInterval(-100,100);
+tries = 150; 
 a = 0;
 b = 10;
+
 root = 'Not found';
 run = 0;
 
@@ -13,7 +14,7 @@ while run < tries
     xk = (a + b)/2;
     root = xk;
     
-    if n.testCandidate(xk) < precision
+    if n.testCandidate(xk) == 1
         break;
     end    
         

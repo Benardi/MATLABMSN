@@ -4,15 +4,17 @@ classdef NumericalEquationSolver
     
     properties
         Equation
+        Precision
         a
         b
     end
     
     methods
-        function obj = NumericalEquationSolver(equation)
+        function obj = NumericalEquationSolver(equation, precision)
             if nargin > 0
                 if strcmp(class(equation),'sym') == 1 
                     obj.Equation = equation;
+                    obj.Precision = precision;
                 else
                     error('Insert a symbolic function')
                 end
@@ -45,7 +47,13 @@ classdef NumericalEquationSolver
         end  
         
         function r = testCandidate(obj, entry)
-            r = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
+            estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
+            if estimation <= obj.Precision
+                r = 1;
+            else
+                r = 0;
+            end    
+            
         end
         
         function r = testTheorem1(obj, a, b)
@@ -59,9 +67,6 @@ classdef NumericalEquationSolver
         
         
         end
-
-        
-
         
         function r = testHypothesis(obj, a, b)
             r = 1;
