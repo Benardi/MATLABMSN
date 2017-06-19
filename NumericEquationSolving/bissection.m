@@ -1,14 +1,14 @@
 syms x a b
 equ(x) = x^2 - 4;
 n = NumericalEquationSolver(x^2 - 4);
-tries = 100; 
-precision= 0.0000000001;
 n.setInterval(0,10);
+tries = 100; 
+precision= 0.0001;
 a = 0;
 b = 10;
 root = 'Not found';
 run = 0;
-xk = (a + b)/2;
+
 while run < tries
     xk = (a + b)/2;
     root = xk;

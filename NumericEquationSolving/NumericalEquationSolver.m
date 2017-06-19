@@ -4,8 +4,8 @@ classdef NumericalEquationSolver
     
     properties
         Equation
-        LeftEndPoint
-        RightEndPoint
+        a
+        b
     end
     
     methods
@@ -29,17 +29,17 @@ classdef NumericalEquationSolver
             elseif self.testHypothesis(a,b) == 0
                 error('Interval violates Hypothesis')
             else
-                self.LeftEndPoint = a;
-                self.RightEndPoint = b;
+                self.a = a;
+                self.b = b;
             end
         end
            
         function r = defineNewInterval(obj, xk)
-             if obj.testTheorem1(obj.LeftEndPoint, xk) == 1
-                 obj.RightEndPoint = xk;
+             if obj.testTheorem1(obj.a, xk) == 1
+                 obj.b = xk;
                  
              else
-                 obj.LeftEndPoint = xk;
+                 obj.a = xk;
              end
                r = obj;  
         end  
