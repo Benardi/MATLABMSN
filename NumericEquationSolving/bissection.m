@@ -13,7 +13,7 @@ while run < tries
     xk = (a + b)/2;
     root = xk;
     
-    if n.testCandidate(xk, x0) == 1
+    if n.benchmarkTest(xk, x0) == 1
         break;
     end    
         
