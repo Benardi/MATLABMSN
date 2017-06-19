@@ -4,11 +4,16 @@ n = NumericalEquationSolver(x^3 -9 * x + 3, 0.0000000000000000000000001);
 tries = 5000; 
 a = -4;
 b = -2;
-n.testIntervalforNewton(a,b);
+x0 = -3.5;
+r = n.testIntervalforNewton(a,b,x0);
+
+if r == 0
+    disp('Interval does not meet requirements');
+    return
+end
 
 root = 'Not found';
 run = 0;
-x0 = 1.5;
 previous = x0;
 
 while run < tries

@@ -33,20 +33,24 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = testIntervalforNewton(self, a, b)
+        function r = testIntervalforNewton(self, a, b,x0)
             f = self.Equation;
             f1 = diff(f);
             f2 = diff(f1);
             if self.testIntervalContinuity(a, b, f) == 0 
                 error('Equation contains descontinuity at interval')
             elseif self.testIntervalContinuity(a, b, f1) == 0
-                error('First Derivative contains descontinuity at interval')
+                r = 0;
             elseif self.testIntervalContinuity(a, b, f2) == 0
-                error('Second Derivative contains descontinuity at interval')
+                r = 0;
             elseif self.testTheorem1(a,b) == 0
                 error('f(a)f(b) > 0')
             elseif self.testHypothesis(a,b) == 0
                 error('First Derivative doesn''t preserve signal at interval')
+            elseif x0 < a || x0 > b
+                r = 0;
+            else
+                r = 1;
             end
         end   
         
