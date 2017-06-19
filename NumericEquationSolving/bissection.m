@@ -1,8 +1,8 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^3 -x - 1, 0.000000001);
-n.testInterval(1,2);
-tries = 50; 
+n = NumericalEquationSolver(x^2 - 4, 0.0000000000000000000000001);
+n.testInterval(0,100);
+tries = 5000; 
 a = 1;
 b = 2;
 

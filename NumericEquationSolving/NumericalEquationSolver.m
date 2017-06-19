@@ -66,7 +66,7 @@ classdef NumericalEquationSolver
         
         function r = testCandidate(obj, entry)
             estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
-            if estimation <= obj.Precision
+            if estimation <= obj.Precision || estimation == 0
                 r = 1;
             else
                 r = 0;
