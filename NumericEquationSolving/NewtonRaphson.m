@@ -1,10 +1,10 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^3 -9 * x + 3, 0.0000000000000000000000001);
+n = NumericalEquationSolver(x^3 -x - 1, 0.0000000000000000000000001);
 tries = 5000; 
-a = -4;
-b = -2;
-x0 = -3.5;
+a = 1;
+b = 2;
+x0 = 0;
 r = n.testIntervalforNewton(a,b,x0);
 
 if r == 0

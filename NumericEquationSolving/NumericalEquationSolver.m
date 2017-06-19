@@ -33,6 +33,18 @@ classdef NumericalEquationSolver
             end
         end
         
+        function r = testFurtherDivergence(self, previous, current)
+            equ = self.Equation;
+            fPrevious = vpa(subs(equ,symvar(equ,1),previous));
+            fCurrent = vpa(subs(equ,symvar(equ,1),current));
+            
+            if fPrevious > fCurrent
+                r = 0;
+            else
+                r = 1;
+            end
+        end
+        
         function r = testIntervalforNewton(self, a, b,x0)
             f = self.Equation;
             f1 = diff(f);

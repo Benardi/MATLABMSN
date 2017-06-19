@@ -1,9 +1,9 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^2 - 4, 0.0000000000000000000000001);
+n = NumericalEquationSolver(x^3 -x - 1, 0.0000000000000000000000001);
 tries = 5000; 
-a = -100;
-b = 0;
+a = 1;
+b = 2;
 n.testIntervalBissection(a,b);
 
 root = 'Not found';
