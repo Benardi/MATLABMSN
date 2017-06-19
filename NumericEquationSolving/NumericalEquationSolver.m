@@ -5,8 +5,6 @@ classdef NumericalEquationSolver
     properties
         Equation
         Precision
-        a
-        b
     end
     
     methods
