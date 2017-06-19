@@ -24,20 +24,36 @@ classdef NumericalEquationSolver
         end
         
         function self = testInterval(self, a, b)
-            if self.testIntervalContinuity(a,b) == 0      
-                error('Interval contains descontinuity')
+            if self.testIntervalContinuity(a,b, self.Equation) == 0      
+                error('Equation contains descontinuity at interval')
                 
             elseif self.testTheorem1(a,b) == 0
-                error('Interval violates Theorem1')
+                error('f(a)f(b) > 0')
 
             elseif self.testHypothesis(a,b) == 0
-                error('Interval violates Hypothesis')
+                error('First Derivative doesn''t preserve signal at interval')
             else
                 self.a = a;
                 self.b = b;
             end
         end
-           
+        
+        function self = testIntervalforNewton(self, a, b)
+            f = self.Equation;
+            f1 = diff(f);
+            f2 = diff(f1);
+            if self.testIntervalContinuity(a, b, f) == 0 
+                error('Equation contains descontinuity at interval')
+            elseif self.testIntervalContinuity(a, b, f1) == 0
+                error('First Derivative contains descontinuity at interval')
+            elseif self.testIntervalContinuity(a, b, f2) == 0
+                error('Second Derivative contains descontinuity at interval')
+            elseif self.testTheorem1(a,b) == 0
+                error('f(a)f(b) > 0')
+            elseif self.testHypothesis(a,b) == 0
+                error('First Derivative doesn''t preserve signal at interval')
+            end
+        end   
         function r = defineNewInterval(obj, xk)
              if obj.testTheorem1(obj.a, xk) == 1
                  obj.b = xk;
@@ -80,9 +96,9 @@ classdef NumericalEquationSolver
         end
                  
         
-        function r = testIntervalContinuity(obj, a , b)
+        function r = testIntervalContinuity(obj, a , b, equation)
             r = 1;
-            disc = feval(symengine, 'discont', obj.Equation, symvar(obj.Equation, 1));
+            disc = feval(symengine, 'discont', equation, symvar(obj.Equation, 1));
             for val = disc
                 if (val == a || val ==b || (val > a && val < b))
                     r = 0;
