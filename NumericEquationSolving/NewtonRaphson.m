@@ -1,9 +1,9 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^2 - 4, 0.0000000000000000000000001);
+n = NumericalEquationSolver(x^3 -9 * x + 3, 0.0000000000000000000000001);
 tries = 5000; 
-a = -100;
-b = 0;
+a = -4;
+b = -2;
 n.testIntervalforNewton(a,b);
 
 root = 'Not found';

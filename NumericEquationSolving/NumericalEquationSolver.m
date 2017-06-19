@@ -23,7 +23,7 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = testInterval(self, a, b)
+        function self = testIntervalBissection(self, a, b)
             if self.testIntervalContinuity(a,b, self.Equation) == 0      
                 error('Equation contains descontinuity at interval')
                 
@@ -51,15 +51,6 @@ classdef NumericalEquationSolver
                 error('First Derivative doesn''t preserve signal at interval')
             end
         end   
-        function r = defineNewInterval(obj, xk)
-             if obj.testTheorem1(obj.a, xk) == 1
-                 obj.b = xk;
-                 
-             else
-                 obj.a = xk;
-             end
-               r = obj;  
-        end  
         
         function r = benchmarkTest(obj, entry, previous)
             relativeError = abs((entry - previous)/entry); 

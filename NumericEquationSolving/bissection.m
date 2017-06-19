@@ -4,7 +4,7 @@ n = NumericalEquationSolver(x^2 - 4, 0.0000000000000000000000001);
 tries = 5000; 
 a = -100;
 b = 0;
-n.testInterval(a,b);
+n.testIntervalBissection(a,b);
 
 root = 'Not found';
 run = 0;
