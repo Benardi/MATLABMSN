@@ -21,7 +21,7 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = setInterval(self, a, b)
+        function self = testInterval(self, a, b)
             if self.testIntervalContinuity(a,b) == 0      
                 error('Interval contains descontinuity')
                 

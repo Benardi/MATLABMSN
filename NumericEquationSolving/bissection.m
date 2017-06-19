@@ -1,11 +1,10 @@
 syms x a b
 format long
-equ(x) = x^3 -x - 1;
-n = NumericalEquationSolver(equ(x), 0.0000000000001);
-n.setInterval(-100,100);
+n = NumericalEquationSolver(x^3 -x - 1, 0.0000000000000000000001);
+n.testInterval(1,2);
 tries = 150; 
-a = 0;
-b = 10;
+a = 1;
+b = 2;
 
 root = 'Not found';
 run = 0;
@@ -26,7 +25,7 @@ while run < tries
     end
     run = run + 1;
                        
-end    
-disp(root);
-disp(vpa(equ(root)));
+end
 disp(run);
+disp(root);
+disp(vpa(subs(n.Equation,symvar(n.Equation,1),root)));
