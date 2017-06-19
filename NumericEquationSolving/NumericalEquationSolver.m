@@ -12,11 +12,13 @@ classdef NumericalEquationSolver
     methods
         function obj = NumericalEquationSolver(equation, precision)
             if nargin > 0
-                if strcmp(class(equation),'sym') == 1 
+                if strcmp(class(equation),'sym') == 0 
+                    error('Insert a symbolic function')
+                elseif isnumeric(precision) == 0
+                    error('Insert a numeric value')
+                else
                     obj.Equation = equation;
                     obj.Precision = precision;
-                else
-                    error('Insert a symbolic function')
                 end
             end
         end
