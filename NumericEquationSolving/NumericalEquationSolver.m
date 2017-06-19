@@ -23,7 +23,7 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = testInterval(self, a, b)
+        function r = testInterval(self, a, b)
             if self.testIntervalContinuity(a,b, self.Equation) == 0      
                 error('Equation contains descontinuity at interval')
                 
@@ -32,9 +32,6 @@ classdef NumericalEquationSolver
 
             elseif self.testHypothesis(a,b) == 0
                 error('First Derivative doesn''t preserve signal at interval')
-            else
-                self.a = a;
-                self.b = b;
             end
         end
         
@@ -64,9 +61,10 @@ classdef NumericalEquationSolver
                r = obj;  
         end  
         
-        function r = testCandidate(obj, entry)
+        function r = testCandidate(obj, entry, previous)
+            relativeError = abs((entry - previous)/entry); 
             estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
-            if estimation <= obj.Precision || estimation == 0
+            if estimation <= obj.Precision || estimation == 0 || relativeError < obj.Precision
                 r = 1;
             else
                 r = 0;
