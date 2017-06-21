@@ -1,10 +1,10 @@
 syms x a b
 format long
-n = NumericalEquationSolver(exp(x), 0.01e-90);
-tries = 1000; 
-a = -1;
-b = 2;
-x0 = 0;
+n = NumericalEquationSolver(x^4 + 3*x^3 -15*x^2 -2^x + 9, 0.1e-10);
+tries = 5000; 
+a = -8;
+b = -4;
+x0 = (a + b)/2;
 r = n.testIntervalforNewton(a, b, x0, 1);
 
 if r == 0
