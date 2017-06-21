@@ -1,10 +1,10 @@
 syms x a b
 format short
-n = NumericalEquationSolver(x^3 - 0.165* x^2 + x *10^-4 +3.993, 0.0000000000000000000000001);
+n = NumericalEquationSolver(x^3 - 0.165*x^2 +3.993*10^-4 , 0.0000000000000000000000001);
 tries = 5000; 
 a = 1;
 b = 2;
-x0 = 0;
+x0 = 1;
 r = n.testIntervalforNewton(a,b,x0,1);
 
 if r == 0
@@ -25,10 +25,11 @@ while run < tries
     if n.testExactMatch(xk) == 1
         break;
     end  
-    if n.testTolerance(xk, previous) == 1
-        break;
-    end      
-       
+    if(run > 0)
+        if n.testTolerance(xk, previous) == 1
+            break;
+        end      
+    end
     run = run + 1;
     previous = xk;  
 end

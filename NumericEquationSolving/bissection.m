@@ -8,15 +8,20 @@ n.testIntervalBissection(a,b);
 
 root = 'Not found';
 run = 0;
-x0 = 0;
+previous = 0;
 while run < tries
     xk = (a + b)/2;
     root = xk;
     
-    if n.benchmarkTest(xk, x0) == 1
+    if n.testExactMatch(xk) == 1
         break;
-    end    
-        
+    end  
+    if(run > 0)
+        if n.testTolerance(xk, previous) == 1
+            break;
+        end      
+    end
+    
     if n.testTheorem1(a, xk) == 1
        b = xk;
                
@@ -24,7 +29,7 @@ while run < tries
        a = xk;
     end
     run = run + 1;
-    x0 = xk;                   
+    previous = xk;                   
 end
 disp(run);
 disp(root);

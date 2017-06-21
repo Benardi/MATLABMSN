@@ -15,8 +15,7 @@ end
 
 root = 'Not found';
 run = 0;
-previous1 = x0;
-previous2 = 0;
+previous = x0;
 while run < tries
     if switchVar == 0 % calls Newton's Method
         fxk = vpa(subs(n.Equation,symvar(n.Equation,1),previous));
@@ -27,10 +26,7 @@ while run < tries
         % If Newton's Method generates divergence in xk switchs to Bissection
         if n.testFurtherDivergence(previous, xk) == 1
             switchVar = 1;
-        end
-        
-        if n.benchmarkTest(xk, previous1) == 1
-            break;
+            previous = 0;
         end
         
     else % calls Bissection Method
@@ -43,12 +39,20 @@ while run < tries
         else
             a = xk;
         end
-        previous2 = xk;
+        previous = xk;
         
     end
-     if n.benchmarkTest(xk, previous1) == 1
+    
+    if n.testExactMatch(xk) == 1
         break;
-     end
+    end 
+    
+    if(run > 0)
+        if n.testTolerance(xk, previous) == 1
+            break;
+        end      
+    end
+    
     previous = xk;     
     run = run + 1;
     
