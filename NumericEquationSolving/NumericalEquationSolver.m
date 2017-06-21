@@ -21,15 +21,18 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = testIntervalBissection(self, a, b)
-            if self.testIntervalContinuity(a,b, self.Equation) == 0      
-                error('Equation contains descontinuity at interval')
+        function self = testIntervalBissection(self, a, b, disable)
+            if disable == 1
+            else
+                if self.testIntervalContinuity(a,b, self.Equation) == 0      
+                    error('Equation contains descontinuity at interval')
                 
-            elseif self.testTheorem1(a,b) == 0
-                error('f(a)f(b) > 0')
+                elseif self.testTheorem1(a,b) == 0
+                    error('f(a)f(b) > 0')
 
-            elseif self.testHypothesis(a,b) == 0
-                error('First Derivative doesn''t preserve signal at interval')
+                elseif self.testHypothesis(a,b) == 0
+                    error('First Derivative doesn''t preserve signal at interval')
+                end
             end
         end
         

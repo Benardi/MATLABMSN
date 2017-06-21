@@ -1,11 +1,11 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^3 -x -1, 0.0000000000000000000000001);
+n = NumericalEquationSolver(exp(x), 0.01e-90);
 tries = 5000; 
-a = 1;
+a = -1;
 b = 2;
-x0 = 2;
-r = n.testIntervalforNewton(a,b,x0,0);
+x0 = 0;
+r = n.testIntervalforNewton(a, b, x0, 1);
 
 switchVar = 0;
 if r == 0

@@ -1,10 +1,10 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^3 -x - 1, 0.0000000000000000000000001);
-tries = 5000; 
-a = 1;
+n = NumericalEquationSolver(exp(x), 0.01e-90);
+tries = 1000; 
+a = -1;
 b = 2;
-n.testIntervalBissection(a,b);
+n.testIntervalBissection(a,b,1);
 
 root = 'Not found';
 run = 0;

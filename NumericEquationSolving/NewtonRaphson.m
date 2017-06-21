@@ -1,11 +1,11 @@
 syms x a b
-format short
-n = NumericalEquationSolver(x^3 - 0.165*x^2 +3.993*10^-4 , 0.0000000000000000000000001);
-tries = 5000; 
-a = 1;
+format long
+n = NumericalEquationSolver(exp(x), 0.01e-90);
+tries = 1000; 
+a = -1;
 b = 2;
-x0 = 1;
-r = n.testIntervalforNewton(a,b,x0,1);
+x0 = 0;
+r = n.testIntervalforNewton(a, b, x0, 1);
 
 if r == 0
     disp('Interval does not meet requirements');
