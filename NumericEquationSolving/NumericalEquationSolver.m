@@ -21,17 +21,15 @@ classdef NumericalEquationSolver
             end
         end
         
-        function self = testIntervalBissection(self, a, b, disable)
+        function r = testIntervalBissection(self, a, b, disable)
             if disable == 1
+                r = 1;
             else
-                if self.testIntervalContinuity(a,b, self.Equation) == 0      
-                    error('Equation contains descontinuity at interval')
-                
-                elseif self.testTheorem1(a,b) == 0
-                    error('f(a)f(b) > 0')
-
-                elseif self.testHypothesis(a,b) == 0
-                    error('First Derivative doesn''t preserve signal at interval')
+                if self.testIntervalContinuity(a,b, self.Equation) == 0 || ...
+                   self.testHypothesis(a,b) == 0 || self.testTheorem1(a,b) == 0
+                    r = 0;
+                else
+                    r = 1;
                 end
             end
         end
@@ -55,17 +53,11 @@ classdef NumericalEquationSolver
                 f = self.Equation;
                 f1 = diff(f);
                 f2 = diff(f1);
-                if self.testIntervalContinuity(a, b, f) == 0 
-                    error('Equation contains descontinuity at interval')
-                elseif self.testIntervalContinuity(a, b, f1) == 0
-                    r = 0;
-                elseif self.testIntervalContinuity(a, b, f2) == 0
-                    r = 0;
-                elseif self.testTheorem1(a,b) == 0
-                    error('f(a)f(b) > 0')
-                elseif self.testHypothesis(a,b) == 0
-                    error('First Derivative doesn''t preserve signal at interval')
-                elseif x0 < a || x0 > b
+                if self.testIntervalContinuity(a, b, f) == 0 || ...
+                        self.testIntervalContinuity(a, b, f1) == 0 || ...
+                        self.testIntervalContinuity(a, b, f2) == 0 || ...
+                        self.testTheorem1(a,b) == 0 || ...
+                        self.testHypothesis(a,b) == 0 || x0 < a || x0 > b
                     r = 0;
                 else
                     r = 1;
