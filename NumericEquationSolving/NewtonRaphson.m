@@ -1,11 +1,11 @@
 syms x a b
-format long
-n = NumericalEquationSolver(x^3 -x - 1, 0.0000000000000000000000001);
+format short
+n = NumericalEquationSolver(x^3 - 0.165* x^2 + x *10^-4 +3.993, 0.0000000000000000000000001);
 tries = 5000; 
 a = 1;
 b = 2;
 x0 = 0;
-r = n.testIntervalforNewton(a,b,x0);
+r = n.testIntervalforNewton(a,b,x0,1);
 
 if r == 0
     disp('Interval does not meet requirements');
@@ -22,7 +22,10 @@ while run < tries
     xk = previous - (fxk/f1xk);
     root = xk;
 
-    if n.benchmarkTest(xk, previous) == 1
+    if n.testExactMatch(xk) == 1
+        break;
+    end  
+    if n.testTolerance(xk, previous) == 1
         break;
     end      
        
