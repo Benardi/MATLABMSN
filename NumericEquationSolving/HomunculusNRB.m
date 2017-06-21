@@ -5,9 +5,9 @@ tries = 5000;
 a = -8;
 b = -4;
 
-%r = n.testIntervalBissection(a,b,0);
+r = n.testIntervalBissection(a,b,1);
 
-if r == 1
+if r == 0
     return
 end
 
