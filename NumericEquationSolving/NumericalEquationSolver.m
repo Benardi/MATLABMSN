@@ -21,7 +21,7 @@ classdef NumericalEquationSolver
             end
         end
         
-        function r = testIntervalBissection(self, a, b, disable)
+        function r = testIntervalBisection(self, a, b, disable)
             if disable == 1
                 r = 1;
             else

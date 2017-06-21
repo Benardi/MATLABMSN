@@ -5,7 +5,7 @@ tries = 5000;
 a = -8;
 b = -4;
 
-r = n.testIntervalBissection(a,b,1);
+r = n.testIntervalBisection(a,b,1);
 
 if r == 0
     return
@@ -14,7 +14,7 @@ end
 root = 'Not found';
 
 for i = 1:2
-    % calls Bissection Method
+    % calls Bisection Method
     xk = (a + b)/2;        
     root = xk;
 
