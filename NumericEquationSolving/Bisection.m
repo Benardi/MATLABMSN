@@ -1,6 +1,6 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x*exp(-(x^2)), 0.1e-10);
+n = RootPrecisionChecker(x*exp(-(x^2)), 0.1e-10);
 ct = ConvergenceTester(x*exp(-(x^2)), 0.1e-10);
 tries = 5000; 
 a = -1;
