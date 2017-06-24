@@ -4,12 +4,6 @@ n = NumericalEquationSolver(x^4 + 3*x^3 -15*x^2 -2^x + 9, 0.1e-10);
 tries = 5000; 
 a = -8;
 b = -4;
-r = n.testIntervalBisection(a,b,1);
-
-if r == 0
-    disp('Interval does not meet requirements');
-    return
-end
 
 root = 'Not found';
 run = 0;

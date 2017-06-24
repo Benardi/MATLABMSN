@@ -6,14 +6,6 @@ a = -1;
 b = 4;
 run = 0;
 
-r = n.testIntervalBisection(a,b,1);
-
-if r == 0
-    return
-end
-
-root = 'Not found';
-
 for i = 1:2
     % calls Bisection Method
     xk = (a + b)/2;        
@@ -40,8 +32,6 @@ for i = 1:2
 end
 
 previous = xk;
-
-%r = n.testIntervalforNewton(a, b, previous, 1);
 
 while run < (tries -2) % calls Newton's Method
     fxk = vpa(subs(n.Equation,symvar(n.Equation,1),previous));
