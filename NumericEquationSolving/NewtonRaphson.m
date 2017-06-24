@@ -1,6 +1,6 @@
 syms x a b
 format long
-n = RootPrecisionChecker(x*exp(-(x^2)), 0.1e-10);
+n = RootPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
 tries = 5000; 
 a = -1;
 b = 4;
