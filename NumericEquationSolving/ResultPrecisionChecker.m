@@ -1,7 +1,7 @@
 classdef ResultPrecisionChecker
     % RESULTPRECISIONCHECKER Class that tests if a result is precise enough.
     % This class tests if a given root  is within a given level of precision.
-    % This class makes the relative error an available checking condition.    
+    % This class provides the relative error as a checking condition.    
     
     properties
         Equation % Equation whose root approximation is being tested.
