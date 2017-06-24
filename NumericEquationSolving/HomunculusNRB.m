@@ -1,6 +1,7 @@
 syms x a b
 format long
 n = NumericalEquationSolver(x*exp(-(x^2)), 0.1e-10);
+ct = ConvergenceTester(x*exp(-(x^2)), 0.1e-10);
 tries = 5000; 
 a = -1;
 b = 4;
@@ -11,7 +12,7 @@ for i = 1:2
     xk = (a + b)/2;        
     root = xk;
 
-    if n.testTheorem1(a, xk) == 1
+    if ct.testTheorem1(a, xk) == 1
         b = xk;       
     else
         a = xk;

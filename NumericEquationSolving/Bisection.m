@@ -1,9 +1,10 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^4 + 3*x^3 -15*x^2 -2^x + 9, 0.1e-10);
+n = NumericalEquationSolver(x*exp(-(x^2)), 0.1e-10);
+ct = ConvergenceTester(x*exp(-(x^2)), 0.1e-10);
 tries = 5000; 
-a = -8;
-b = -4;
+a = -1;
+b = 4;
 
 root = 'Not found';
 run = 0;
@@ -21,7 +22,7 @@ while run < tries
         end      
     end
     
-    if n.testTheorem1(a, xk) == 1
+    if ct.testTheorem1(a, xk) == 1
        b = xk;
                
     else
