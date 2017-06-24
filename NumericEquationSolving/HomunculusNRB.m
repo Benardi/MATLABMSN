@@ -1,9 +1,10 @@
 syms x a b
 format long
-n = NumericalEquationSolver(x^4 + 3*x^3 -15*x^2 -2^x + 9, 0.1e-10);
+n = NumericalEquationSolver(x*exp(-(x^2)), 0.1e-10);
 tries = 5000; 
-a = -8;
-b = -4;
+a = -1;
+b = 4;
+run = 0;
 
 r = n.testIntervalBisection(a,b,1);
 
@@ -23,13 +24,25 @@ for i = 1:2
     else
         a = xk;
     end
+    
+    if n.testExactMatch(xk) == 1
+        run = tries;
+        break;
+    end 
+    
+    if(run > 0)
+        if n.testTolerance(xk, previous) == 1
+            run = tries;
+            break;
+        end      
+    end
+    
 end
 
 previous = xk;
 
 %r = n.testIntervalforNewton(a, b, previous, 1);
 
-run = 0;
 while run < (tries -2) % calls Newton's Method
     fxk = vpa(subs(n.Equation,symvar(n.Equation,1),previous));
     f1xk = vpa(subs(diff(n.Equation),symvar(n.Equation,1),previous));
