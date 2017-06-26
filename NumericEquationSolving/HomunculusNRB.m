@@ -1,7 +1,7 @@
 syms x a b
 format long
-n = RootPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
-ct = ConvergenceTester(x*exp(-(x^2)), 0.1e-20);
+n = ResultPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
+ct = ConvergenceTester(x*exp(-(x^2)));
 tries = 5000; 
 a = -1;
 b = 4;
@@ -18,13 +18,13 @@ for i = 1:2
         a = xk;
     end
     
-    if n.testExactMatch(xk) == 1
+    if n.checkAbsoluteError(xk) == 1
         run = tries;
         break;
     end 
     
     if(run > 0)
-        if n.testTolerance(xk, previous) == 1
+        if n.checkRelativeError(xk, previous) == 1
             run = tries;
             break;
         end      
@@ -40,12 +40,12 @@ while run < (tries -2) % calls Newton's Method
     xk = previous - (fxk/f1xk);
     root = xk;   
     
-    if n.testExactMatch(xk) == 1
+    if n.checkAbsoluteError(xk) == 1
         break;
     end 
     
     if(run > 0)
-        if n.testTolerance(xk, previous) == 1
+        if n.checkRelativeError(xk, previous) == 1
             break;
         end      
     end

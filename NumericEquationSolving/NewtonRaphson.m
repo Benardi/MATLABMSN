@@ -1,6 +1,6 @@
 syms x a b
 format long
-n = RootPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
+n = ResultPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
 tries = 5000; 
 a = -1;
 b = 4;
@@ -15,11 +15,11 @@ while run < tries
     xk = previous - (fxk/f1xk);
     root = xk;
 
-    if n.testExactMatch(xk) == 1
+    if n.checkAbsoluteError(xk) == 1
         break;
     end  
     if(run > 0)
-        if n.testTolerance(xk, previous) == 1
+        if n.checkRelativeError(xk, previous) == 1
             break;
         end      
     end

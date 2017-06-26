@@ -9,7 +9,7 @@ classdef ResultPrecisionChecker
     end
     
     methods
-        function obj = RootPrecisionChecker(equation, precision)
+        function obj = ResultPrecisionChecker(equation, precision)
             if nargin > 0
                 if strcmp(class(equation),'sym') == 0
                     error('Insert a symbolic function')
@@ -23,13 +23,11 @@ classdef ResultPrecisionChecker
         end
         
         
-        function r = testTolerance(obj, entry, previous)
-        % Method tests whether root is within acceptable precision level.
-        % f(x) at given root or relative error are testing parameters.
+        function r = checkRelativeError(obj, entry, previous)
+        % Method tests whether estimation's relative error is acceptable.
         
             relativeError = abs((entry - previous)/entry);
-            estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
-            if estimation <= obj.Precision || relativeError <= obj.Precision
+            if relativeError == 0 || relativeError <= obj.Precision
                 r = 1;
             else
                 r = 0;
@@ -37,11 +35,11 @@ classdef ResultPrecisionChecker
             
         end
         
-        function r = testExactMatch(obj, entry)
-        % This method tests whether parameter is exact root of function
+        function r = checkAbsoluteError(obj, entry)
+        % This method tests whether f(entry) is close enough to zero.
         
             estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
-            if estimation == 0
+            if estimation == 0 || estimation <= obj.Precision
                 r = 1;
             else
                 r = 0;
