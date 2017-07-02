@@ -36,7 +36,7 @@ classdef ResultPrecisionChecker
         end
         
         function r = checkAprxRelativeError(obj, entry, previous)
-        % Method tests whether the estimation's is precise enough.
+        % Method tests whether the estimation's precise enough.
         
             relativeError = abs((entry - previous)/entry);
             if relativeError <= obj.Precision
