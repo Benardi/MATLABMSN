@@ -35,6 +35,18 @@ classdef ResultPrecisionChecker
             
         end
         
+        function r = checkAprxRelativeError(obj, entry, previous)
+        % Method tests whether approximate estimation's relative error is acceptable.
+        
+            relativeError = abs((entry - previous)/entry);
+            if relativeError <= obj.Precision
+                r = 1;
+            else
+                r = 0;
+            end
+            
+        end
+        
         function r = checkAbsoluteError(obj, entry)
         % This method tests whether f(entry) is close enough to zero.
         
@@ -46,6 +58,19 @@ classdef ResultPrecisionChecker
             end
             
         end
+        
+        function r = checkAprxAbsoluteError(obj, entry)
+        % This method tests whether f(entry) is close enough to zero.
+        
+            estimation = abs(vpa(subs(obj.Equation,symvar(obj.Equation,1),entry)));
+            if estimation <= obj.Precision
+                r = 1;
+            else
+                r = 0;
+            end
+            
+        end        
+        
     end
     
 end
