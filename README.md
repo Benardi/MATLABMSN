@@ -1,2 +1,2 @@
 # MATLABMSN
-Implementation of Numeric Solutions in MATLAB
+Implementation of Numerical Solutions in MATLAB
