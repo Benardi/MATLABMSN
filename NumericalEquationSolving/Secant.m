@@ -13,11 +13,11 @@ while run < tries
     xk = (x0 * fx1 - x1 * fx0)/(fx1 -fx0);  
     root = xk;
     
-    if n.checkAbsoluteError(xk) == 1
+    if n.checkAprxAbsoluteError(xk) == 1
         break;    
     end
     
-    if n.checkRelativeError(xk, x1) == 1
+    if n.checkAprxRelativeError(xk, x1) == 1
             break;
     end      
     

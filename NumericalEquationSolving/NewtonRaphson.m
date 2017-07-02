@@ -1,10 +1,8 @@
-syms x a b
+syms x
 format long
 n = ResultPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
 tries = 5000; 
-a = -1;
-b = 4;
-x0 = (a + b)/2;
+x0 = 1.5;
 root = 'Not found';
 run = 0;
 previous = x0;
@@ -15,11 +13,11 @@ while run < tries
     xk = previous - (fxk/f1xk);
     root = xk;
 
-    if n.checkAbsoluteError(xk) == 1
+    if n.checkAprxAbsoluteError(xk) == 1
         break;
     end  
     if(run > 0)
-        if n.checkRelativeError(xk, previous) == 1
+        if n.checkAprxRelativeError(xk, previous) == 1
             break;
         end      
     end

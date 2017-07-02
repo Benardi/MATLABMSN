@@ -40,12 +40,12 @@ while run < (tries -2) % calls Newton's Method
     xk = previous - (fxk/f1xk);
     root = xk;   
     
-    if n.checkAbsoluteError(xk) == 1
+    if n.checkAprxAbsoluteError(xk) == 1
         break;
     end 
     
     if(run > 0)
-        if n.checkRelativeError(xk, previous) == 1
+        if n.checkAprxRelativeError(xk, previous) == 1
             break;
         end      
     end
