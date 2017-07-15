@@ -30,8 +30,21 @@ classdef LinearSystemBuilder
         
        function r = createBaseMatrix(self)
            r = zeros(length(self.EquationsMatrix), self.highestDegree() + 1);
+       end
+       
+       function r = buildsLinearSystem(self)
+            baseMatrix = self.createBaseMatrix();
 
-        
+            for row = 1: size(baseMatrix, 1)
+                currentEqu = sym2poly(self.EquationsMatrix(row));
+                diffSize = length(baseMatrix) - length(currentEqu);
+                display(baseMatrix)
+
+                for i = 1:length(currentEqu)
+                    baseMatrix(row,diffSize + i) = currentEqu(1,i);
+                end   
+            end
+            r = baseMatrix;
        end
        
     end
