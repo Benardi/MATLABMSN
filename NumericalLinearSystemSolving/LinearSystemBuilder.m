@@ -12,6 +12,7 @@ classdef LinearSystemBuilder
             
         end
         
+        
         function r = extractPolynomDegree(self, polyn)
                r = length(sym2poly(polyn))- 1;
         end
@@ -26,6 +27,12 @@ classdef LinearSystemBuilder
             end
             r = max;
         end
+        
+       function r = createBaseMatrix(self)
+           r = zeros(length(self.EquationsMatrix), self.highestDegree() + 1);
+
+        
+       end
        
     end
     
