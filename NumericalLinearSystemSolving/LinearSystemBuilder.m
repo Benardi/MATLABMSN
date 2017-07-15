@@ -21,6 +21,7 @@ classdef LinearSystemBuilder
         end
         
         
+        
         function r = getCoefficients(self, polynom)
             variables = self.getAllVariables();
             temp = 1;
@@ -29,10 +30,10 @@ classdef LinearSystemBuilder
             end
             r = coeffs(temp + polynom);
             r = r - 1;
-            r = single(r);
-            temp = r(1);
-            r(1) = [];
-            r = [r temp];
+            r = fliplr(single(r));
+            r(end) = -1 * (r(end));
+            
+            
             
         end
         
@@ -41,7 +42,17 @@ classdef LinearSystemBuilder
             for equ = self.EquationsMatrix
                 r = [r; self.getCoefficients(equ)];
             end
-        end     
+        end  
+        
+        function r = generAprxResults(self, xk)
+            r = [];
+            xk = xk(:)';
+
+            for equ = self.EquationsMatrix
+                r = [r vpa(subs(equ, symvar(equ), xk))];
+            end
+        end
+        
     end
     
 end
