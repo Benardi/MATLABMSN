@@ -12,41 +12,36 @@ classdef LinearSystemBuilder
             
         end
         
-        
-        function r = extractPolynomDegree(self, polyn)
-               r = length(sym2poly(polyn))- 1;
-        end
-        
-        function r = highestDegree(self)
-            max = 0;
+        function r = getAllVariables(self)
+            r = [];
             for equ = self.EquationsMatrix
-                temp = self.extractPolynomDegree(equ);
-                if( temp > max)
-                    max = temp;
-                end
+                r = [r symvar(equ)];
             end
-            r = max;
+            r = unique(r);
         end
         
-       function r = createBaseMatrix(self)
-           r = zeros(length(self.EquationsMatrix), self.highestDegree() + 1);
-       end
-       
-       function r = buildsLinearSystem(self)
-            baseMatrix = self.createBaseMatrix();
-
-            for row = 1: size(baseMatrix, 1)
-                currentEqu = sym2poly(self.EquationsMatrix(row));
-                diffSize = length(baseMatrix) - length(currentEqu);
-                display(baseMatrix)
-
-                for i = 1:length(currentEqu)
-                    baseMatrix(row,diffSize + i) = currentEqu(1,i);
-                end   
+        
+        function r = getCoefficients(self, polynom)
+            variables = self.getAllVariables();
+            temp = 1;
+            for elem = variables
+                temp = temp +elem;
             end
-            r = baseMatrix;
-       end
-       
+            r = coeffs(temp + polynom);
+            r = r - 1;
+            r = single(r);
+            temp = r(1);
+            r(1) = [];
+            r = [r temp];
+            
+        end
+        
+        function r = createSystem(self)
+            r = [];
+            for equ = self.EquationsMatrix
+                r = [r; self.getCoefficients(equ)];
+            end
+        end     
     end
     
 end
