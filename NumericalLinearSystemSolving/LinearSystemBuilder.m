@@ -28,8 +28,18 @@ classdef LinearSystemBuilder
             for elem = variables
                 temp = temp +elem;
             end
-            r = coeffs(temp + polynom);
-            r = r - 1;
+
+            r = coeffs(polynom);
+            checker = r(1);
+            if(checker == -1)
+                temp = -1 * temp;
+            end
+            r = r + coeffs(temp);
+            if(checker == -1)
+                r = r + 1;
+            else
+                r = r - 1;
+            end
             r = fliplr(single(r));
             r(end) = -1 * (r(end));
             
