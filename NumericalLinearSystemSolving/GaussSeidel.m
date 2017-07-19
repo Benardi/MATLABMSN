@@ -2,8 +2,7 @@ syms x y z;
 lb = LinearSystemBuilder([(5*x + y + z - 5) (3*x + 4*y +z - 6) (3*x + 3*y + 6*z)]);
 numVariables = length(lb.getAllVariables);
 Matrix = lb.createSystem();
-
-tolerance = 0.0005;
+tolerance = 0.05;
 estimations = [-1; 0; 1];
 tries = 100;
 
@@ -51,7 +50,8 @@ while runs < tries
             isTolerable = 0;
         end
     end
-    if isTolerable
+    
+    if (isTolerable == 1)
         break;
     end
     
@@ -60,4 +60,4 @@ while runs < tries
 end
 
 disp(runs);
-disp(lb.generAprxResults(estimations));
+disp(lb.generAprxResults(tempEstim));
