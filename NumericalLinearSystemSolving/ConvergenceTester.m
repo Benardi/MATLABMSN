@@ -11,7 +11,7 @@ classdef ConvergenceTester
             obj.systemBuilder = LinearSystemBuilder(matrix);
         end
         
-        function r = SassenfeldCriteria(self)
+        function r = sassenfeldCriterion(self)
             r = 0;
             numVariables = length(self.systemBuilder.getAllVariables());
             system = self.systemBuilder.createSystem();
@@ -32,6 +32,22 @@ classdef ConvergenceTester
             
         end
         
+        function r = lineCriterion(self)
+            system = self.systemBuilder.createSystem();
+            system = system(:,1:end -1);
+            r = 1;
+            for i =1:size(system,1)
+                row = system(i,:);
+                pivot = row(i);
+                row(i) = 0;
+                S = sum(abs(row));
+                if (pivot <= S)
+                    r = 0;
+                    break;
+                end
+            end
+
+        end
     end
     
 end
