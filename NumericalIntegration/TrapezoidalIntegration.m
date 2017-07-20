@@ -40,6 +40,26 @@ classdef TrapezoidalIntegration
             end
         end
         
+        function r = getMaxImageOfFun(self, a, b)
+            r = subs(self.Equation, symvar(self.Equation, 1), a);
+            interval = linspace(a,b);
+            for point = interval
+                temp = vpa(subs(self.Equation, symvar(self.Equation, 1), point));
+                if temp > r
+                    r = temp;
+                end
+            end
+        end
+        
+        function r = estimatesErrrorAlt(self, a, b, numbOfPoints)
+            r = ((numbOfPoints - 1)* ((abs(b - a)/(numbOfPoints - 1))^ 3) * self.getMaxImageOfFun(a, b))/12;
+        end
+
+        
+        function r = estimatesErrror(self, N, h, a, b)
+            r = N * (h ^ 3)* self.getMaxImageOfFun(a, b)/12;
+        end
+        
         
     end
     
