@@ -25,7 +25,7 @@ while run < tries
     end
     
     
-    if ct.testTheorem1(a, xk) == 1
+    if ct.existsSomeRootAtInterval(a, xk) == 1
         b =xk;
     else
         a = xk;

@@ -1,6 +1,8 @@
 syms x a b
 format long
 n = ResultPrecisionChecker(x*exp(-(x^2)), 0.1e-20);
+ct = ConvergenceTester(x*exp(-(x^2)));
+
 tries = 5000; 
 a = -1;
 b = 4;
@@ -21,7 +23,7 @@ while run < tries
         end      
     end
     
-    if vpa(subs(n.Equation,symvar(n.Equation,1),a)) * vpa(subs(n.Equation,symvar(n.Equation,1),xk)) < 0
+    if ct.existsSomeRootAtInterval(a,xk) == 1
        b = xk;
                
     else

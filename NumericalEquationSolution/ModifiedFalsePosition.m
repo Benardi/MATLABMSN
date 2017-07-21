@@ -27,16 +27,16 @@ while run < tries
     end
  
     fxk = vpa(subs(n.Equation, symvar(n.Equation,1), xk));
-    if ct.testTheorem1(a, xk) == 1
+    if ct.existsSomeRootAtInterval(a, xk) == 1
         b = xk;
         G = fxk;
-        if ct.testTheorem1(xk, previous) == 0
+        if ct.existsSomeRootAtInterval(xk, previous) == 0
             F = F/2;
         end
     else
         a = xk;
         F = fxk;
-        if ct.testTheorem1(xk, previous) == 0
+        if ct.existsSomeRootAtInterval(xk, previous) == 0
             G = G/2;
         end
     end  
@@ -47,5 +47,5 @@ end
 
 disp(run); % Displays times the Method was run
 disp(root); % Displays root approximation
-disp(vpa(subs(n.Equation,symvar(n.Equation,1),root))); % Displays y at root 
+disp(vpa(subs(n.Equation,symvar(n.Equation,1),root))); % Displays y at rootz 
 

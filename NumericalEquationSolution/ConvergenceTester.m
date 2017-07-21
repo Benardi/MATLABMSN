@@ -54,6 +54,20 @@ classdef ConvergenceTester
             end
             
         end
+        
+        function r = existsSomeRootAtInterval(obj, a, b)
+        % This methods tests whether there's some root at a given interval.
+        % The method compares if f(a) * f(b) < 0. 
+            r = 1;
+            equ = obj.Equation;
+            
+            if vpa(subs(equ,symvar(equ,1),a)) * vpa(subs(equ,symvar(equ,1),b)) > 0
+                r = 0;
+                
+            end
+            
+            
+        end
     end
     
     methods (Access = private)
