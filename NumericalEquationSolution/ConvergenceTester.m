@@ -54,7 +54,9 @@ classdef ConvergenceTester
             end
             
         end
-        
+    end
+    
+    methods (Access = private)
         function r = testTheorem1(obj, a, b)
         % This methods tests whether there's some root at a given interval.
         % The method compares if f(a) * f(b) < 0. 
