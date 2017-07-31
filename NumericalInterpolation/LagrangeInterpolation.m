@@ -1,5 +1,5 @@
 syms x
-points = [1 2;2 5;6 3; 10 8];
+points = [1 101.25; 2 106; 3 104.01; 5 105.71; 6 106.09; 7 120.9];
 
 terms = [];
 
@@ -36,5 +36,10 @@ for g=1:length(points)
     y = y + fxn *(terms(g)/denominators(g));
 end
 
-disp(y);
-subs(y, x, 10);
+disp(simplify(y)); % Simplified Lagrange Interpolation
+
+results = [vpa(subs(y, x, 1)) vpa(subs(y, x, 2)) vpa(subs(y, x, 3))];
+results = [results vpa(subs(y, x, 5)) vpa(subs(y, x, 6)) vpa(subs(y, x, 7))];
+disp(results); % Must contain exactly all f(x);
+disp(vpa(subs(y, x, 4))); % Interpolation at x =4
+disp(vpa(subs(y, x, 8))); % Extrapolation at x =8
