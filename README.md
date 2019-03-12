@@ -12,7 +12,7 @@ Implementation of classical numerical methods in MATLAB. This project encompasse
 
 * **Benardi Nunes** - *Initial work* - [Benardi](https://github.com/Benardi)
 
-See also the list of [contributors](https://github.com/Benardi/numerical_methods/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Benardi/NumericalMethods/contributors) who participated in this project.
 
 ## License
 
